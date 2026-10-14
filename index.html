@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discrete Probability Distributions - Educational Web Application for Undergraduate AIML Laboratory">
+  <title>Discrete Probability Distributions | AIML Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=6">
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-badge">AIML LAB</div>
+        <div class="brand-text">
+          <h1 class="brand-title">Discrete Probability Distributions</h1>
+          <p class="brand-subtitle">Interactive Laboratory Learning Module</p>
+        </div>
+      </div>
+      
+      <nav class="main-nav" aria-label="Main Navigation">
+        <button type="button" class="nav-tab active" data-tab="home" id="nav-btn-home" onclick="switchTab('home')">
+          <span class="nav-icon">⌂</span> Home
+        </button>
+        <button type="button" class="nav-tab" data-tab="binomial" id="nav-btn-binomial" onclick="switchTab('binomial')">
+          <span class="nav-icon">📊</span> Binomial
+          <span class="status-pill active-pill">Active</span>
+        </button>
+        <button type="button" class="nav-tab" data-tab="poisson" id="nav-btn-poisson" onclick="switchTab('poisson')">
+          <span class="nav-icon">⏱</span> Poisson
+          <span class="status-pill active-pill">Active</span>
+        </button>
+        <button type="button" class="nav-tab" data-tab="geometric" id="nav-btn-geometric" onclick="switchTab('geometric')">
+          <span class="nav-icon">🎯</span> Geometric
+          <span class="status-pill coming-soon">Next</span>
+        </button>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" id="theme-toggle-btn" class="icon-btn" title="Toggle Light/Dark Theme" aria-label="Toggle theme" onclick="toggleTheme()">
+          <span class="theme-icon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-container">
+    
+    <!-- ==================== HOME VIEW ==================== -->
+    <section id="tab-home" class="view-panel active-panel">
+      <div class="hero-card">
+        <div class="hero-content">
+          <span class="eyebrow">Artificial Intelligence & Machine Learning Laboratory</span>
+          <h2 class="hero-title">Understanding Discrete Probability in AIML</h2>
+          <p class="hero-desc">
+            Discrete probability distributions model random variables that take distinct, countable values.
+            In machine learning and data science, they form the cornerstone of classification algorithms,
+            Bayesian modeling, error analysis, and stochastic optimization.
+          </p>
+          <div class="hero-actions">
+            <button type="button" class="btn btn-primary" id="btn-launch-binomial-hero" onclick="switchTab('binomial')">
+              Launch Binomial Module →
+            </button>
+            <a href="#distribution-matrix" class="btn btn-secondary">
+              View Lab Curriculum ↓
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modules Grid -->
+      <div class="section-heading">
+        <h3>Laboratory Distribution Modules</h3>
+        <p>Three foundational discrete models explored in this experimental lab course.</p>
+      </div>
+
+      <div class="modules-grid">
+        <!-- Binomial Card (Active) -->
+        <article class="module-card card-active">
+          <div class="card-status-banner available">● Active Module</div>
+          <div class="module-card-body">
+            <div class="card-header-icon">📊</div>
+            <h4 class="card-title">Binomial Distribution</h4>
+            <div class="math-preview">X ~ B(n, p)</div>
+            <p class="card-description">
+              Models the count of successes in a fixed number of <em>n</em> independent Bernoulli trials,
+              each with constant probability of success <em>p</em>.
+            </p>
+            <div class="aiml-tag">
+              <strong>AIML Context:</strong> Binary classification evaluation, feature dropout, A/B hypothesis testing.
+            </div>
+          </div>
+          <div class="module-card-footer">
+            <button type="button" class="btn btn-primary btn-block" id="btn-launch-binomial-card" onclick="switchTab('binomial')">
+              Open Interactive Lab →
+            </button>
+          </div>
+        </article>
+
+        <!-- Poisson Card (Active) -->
+        <article class="module-card card-active">
+          <div class="card-status-banner available">● Active Module</div>
+          <div class="module-card-body">
+            <div class="card-header-icon">⏱</div>
+            <h4 class="card-title">Poisson Distribution</h4>
+            <div class="math-preview">X ~ Poisson(λ)</div>
+            <p class="card-description">
+              Models the frequency of independent events occurring within a specified interval of time or space,
+              governed by a constant average rate <em>λ</em>.
+            </p>
+            <div class="aiml-tag">
+              <strong>AIML Context:</strong> Modeling server API request bursts, anomaly detection in event logs.
+            </div>
+          </div>
+          <div class="module-card-footer">
+            <button type="button" class="btn btn-primary btn-block" id="btn-launch-poisson-card" onclick="switchTab('poisson')">
+              Open Interactive Lab →
+            </button>
+          </div>
+        </article>
+
+        <!-- Geometric Card (Upcoming) -->
+        <article class="module-card">
+          <div class="card-status-banner upcoming">○ Scheduled for Session 3</div>
+          <div class="module-card-body">
+            <div class="card-header-icon">🎯</div>
+            <h4 class="card-title">Geometric Distribution</h4>
+            <div class="math-preview">X ~ Geom(p)</div>
+            <p class="card-description">
+              Models the number of independent Bernoulli trials required to achieve the very first success,
+              exhibiting the memoryless property.
+            </p>
+            <div class="aiml-tag">
+              <strong>AIML Context:</strong> Reinforcement learning exploration steps until goal reach, search trials.
+            </div>
+          </div>
+          <div class="module-card-footer">
+            <button type="button" class="btn btn-secondary btn-block" id="btn-launch-geometric-card" onclick="switchTab('geometric')">
+              View Module Overview →
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <!-- Quick Comparison Matrix -->
+      <section id="distribution-matrix" class="matrix-section">
+        <h3 class="section-subheading">Discrete Distributions Quick Reference</h3>
+        <div class="table-container">
+          <table class="reference-table">
+            <thead>
+              <tr>
+                <th>Distribution</th>
+                <th>Support (k)</th>
+                <th>Parameters</th>
+                <th>Probability Mass Function P(X = k)</th>
+                <th>Mean E[X]</th>
+                <th>Variance Var(X)</th>
+                <th>Lab Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row">
+                <td><strong>Binomial</strong></td>
+                <td>k ∈ {0, 1, ..., n}</td>
+                <td>n ∈ ℕ, p ∈ [0, 1]</td>
+                <td><code>ⁿCₖ · pᵏ · (1 - p)ⁿ⁻ᵏ</code></td>
+                <td>n · p</td>
+                <td>n · p · (1 - p)</td>
+                <td><span class="badge-status ready">Functional</span></td>
+              </tr>
+              <tr>
+                <td><strong>Poisson</strong></td>
+                <td>k ∈ {0, 1, 2, ...}</td>
+                <td>λ &gt; 0</td>
+                <td><code>(λᵏ · e⁻λ) / k!</code></td>
+                <td>λ</td>
+                <td>λ</td>
+                <td><span class="badge-status pending">Coming Soon</span></td>
+              </tr>
+              <tr>
+                <td><strong>Geometric</strong></td>
+                <td>k ∈ {1, 2, 3, ...}</td>
+                <td>p ∈ (0, 1]</td>
+                <td><code>(1 - p)ᵏ⁻¹ · p</code></td>
+                <td>1 / p</td>
+                <td>(1 - p) / p²</td>
+                <td><span class="badge-status pending">Coming Soon</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- ==================== BINOMIAL VIEW (FUNCTIONAL) ==================== -->
+    <section id="tab-binomial" class="view-panel">
+      <!-- Section Header -->
+      <div class="module-header">
+        <div>
+          <div class="eyebrow-tag">Lab Module 1 • Functional</div>
+          <h2 class="module-title">Binomial Distribution: B(n, p)</h2>
+          <p class="module-subtitle">
+            Study the probability distribution of <em>k</em> successes in <em>n</em> independent Bernoulli trials with probability <em>p</em>.
+          </p>
+        </div>
+        <div class="formula-chip">
+          <span class="formula-label">PMF:</span>
+          <code>P(X = k) = ⁿCₖ · pᵏ · (1 - p)ⁿ⁻ᵏ</code>
+        </div>
+      </div>
+
+      <!-- Quick Presets for AIML Students -->
+      <div class="presets-bar">
+        <span class="presets-label">Binomial Presets:</span>
+        <div class="preset-buttons">
+          <button type="button" class="preset-chip active" data-n="20" data-p="0.35" data-k="7" id="preset-default">
+            Default Lab (n=20, p=0.35)
+          </button>
+          <button type="button" class="preset-chip" data-n="10" data-p="0.5" data-k="5" id="preset-coin">
+            Coin Toss (n=10, p=0.50)
+          </button>
+          <button type="button" class="preset-chip" data-n="20" data-p="0.85" data-k="17" id="preset-classifier">
+            Classifier Accuracy (n=20, p=0.85)
+          </button>
+          <button type="button" class="preset-chip" data-n="50" data-p="0.06" data-k="3" id="preset-anomaly">
+            Anomaly Detection (n=50, p=0.06)
+          </button>
+        </div>
+      </div>
+
+      <!-- Prominent Selected Parameters Display Card -->
+      <div class="selected-params-card">
+        <div class="selected-params-header">
+          <div class="selected-params-title">
+            <span>📋 Selected Parameters Display</span>
+            <span id="validation-status-badge" class="validation-badge valid">✓ Inputs Valid</span>
+          </div>
+          <div class="selected-notation-chip" id="selected-model-notation">X ~ B(n = 20, p = 0.35)</div>
+        </div>
+        <div class="selected-readout-grid">
+          <div class="selected-readout-item">
+            <div class="selected-readout-label">Trials (n)</div>
+            <div class="selected-readout-value" id="disp-selected-n">20</div>
+            <div class="selected-readout-sub">Positive Integer</div>
+          </div>
+          <div class="selected-readout-item">
+            <div class="selected-readout-label">Success Prob (p)</div>
+            <div class="selected-readout-value" id="disp-selected-p">0.35</div>
+            <div class="selected-readout-sub" id="disp-selected-pct">35.0% per trial</div>
+          </div>
+          <div class="selected-readout-item">
+            <div class="selected-readout-label">Failure Prob (q = 1-p)</div>
+            <div class="selected-readout-value" id="disp-selected-q">0.65</div>
+            <div class="selected-readout-sub" id="disp-selected-q-pct">65.0% per trial</div>
+          </div>
+          <div class="selected-readout-item">
+            <div class="selected-readout-label">Expected Mean (μ)</div>
+            <div class="selected-readout-value" id="disp-selected-mean">7.00</div>
+            <div class="selected-readout-sub">μ = n · p</div>
+          </div>
+          <div class="selected-readout-item">
+            <div class="selected-readout-label">Variance (σ²)</div>
+            <div class="selected-readout-value" id="disp-selected-var">4.550</div>
+            <div class="selected-readout-sub">σ² = n · p · (1-p)</div>
+          </div>
+          <div class="selected-readout-item">
+            <div class="selected-readout-label">Std Dev (σ)</div>
+            <div class="selected-readout-value" id="disp-selected-std">2.133</div>
+            <div class="selected-readout-sub">σ = √(n·p·q)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dedicated Statistic Cards Section (Prompt 3) -->
+      <section class="stats-section" aria-label="Binomial Distribution Statistics">
+        <div class="stats-section-header">
+          <div>
+            <h3 class="section-subheading">Binomial Distribution Statistics</h3>
+            <p class="panel-desc">Calculated theoretical moments, dispersion, and shape using selected n and p.</p>
+          </div>
+          <span class="badge-status ready" id="stats-badge-calc">Calculated: n = 20, p = 0.35</span>
+        </div>
+
+        <div class="stats-cards-grid">
+          <!-- Card 1: Mean -->
+          <article class="stat-card" id="card-mean">
+            <div class="stat-card-header">
+              <span class="stat-card-title">Mean E[X] (μ)</span>
+              <span class="stat-card-formula">np</span>
+            </div>
+            <div class="stat-card-value" id="stat-val-mean">7</div>
+            <div class="stat-card-sub" id="stat-sub-mean">20 × 0.35 = 7</div>
+          </article>
+
+          <!-- Card 2: Variance -->
+          <article class="stat-card" id="card-variance">
+            <div class="stat-card-header">
+              <span class="stat-card-title">Variance Var(X) (σ²)</span>
+              <span class="stat-card-formula">np(1-p)</span>
+            </div>
+            <div class="stat-card-value" id="stat-val-var">4.55</div>
+            <div class="stat-card-sub" id="stat-sub-var">20 × 0.35 × 0.65 = 4.55</div>
+          </article>
+
+          <!-- Card 3: Standard Deviation -->
+          <article class="stat-card" id="card-std">
+            <div class="stat-card-header">
+              <span class="stat-card-title">Standard Deviation (σ)</span>
+              <span class="stat-card-formula">√Variance</span>
+            </div>
+            <div class="stat-card-value" id="stat-val-std">2.133</div>
+            <div class="stat-card-sub" id="stat-sub-std">√4.55 = 2.133</div>
+          </article>
+
+          <!-- Card 4: Second Moment -->
+          <article class="stat-card" id="card-second-moment">
+            <div class="stat-card-header">
+              <span class="stat-card-title">Second Moment E[X²]</span>
+              <span class="stat-card-formula">Variance + Mean²</span>
+            </div>
+            <div class="stat-card-value" id="stat-val-second-moment">53.55</div>
+            <div class="stat-card-sub" id="stat-sub-second-moment">4.55 + 7² = 53.55</div>
+          </article>
+
+          <!-- Card 5: Skewness -->
+          <article class="stat-card" id="card-skewness">
+            <div class="stat-card-header">
+              <span class="stat-card-title">Skewness (γ₁)</span>
+              <span class="stat-card-formula">(1-2p) / √(np(1-p))</span>
+            </div>
+            <div class="stat-card-value" id="stat-val-skewness">0.141</div>
+            <div class="stat-card-sub" id="stat-sub-skewness">Positive (right-skewed)</div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Main Interactive Grid -->
+      <div class="lab-layout">
+        <!-- Controls Column -->
+        <div class="controls-panel card">
+          <div class="panel-header">
+            <div>
+              <h3>Input Controls</h3>
+              <p class="panel-desc">Set and validate Bernoulli trial parameters.</p>
+            </div>
+            <button type="button" id="reset-params-btn" class="text-btn" title="Reset to defaults">Reset (n=20, p=0.35)</button>
+          </div>
+
+          <!-- Parameter n -->
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="input-n">Number of trials (<em>n</em>):</label>
+              <span class="val-display" id="display-n">20</span>
+            </div>
+            <div class="slider-input-combo">
+              <input type="range" id="slider-n" min="1" max="60" value="20" step="1" aria-label="Trials slider">
+              <input type="number" id="input-n" min="1" max="100" value="20" step="1" aria-label="Trials number">
+            </div>
+            <span class="input-hint">Validation: <strong>n must be a positive integer</strong> (n ≥ 1).</span>
+            <div id="error-n" class="input-error-msg" hidden></div>
+          </div>
+
+          <!-- Parameter p -->
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="input-p">Probability of success (<em>p</em>):</label>
+              <span class="val-display" id="display-p">0.35</span>
+            </div>
+            <div class="slider-input-combo">
+              <input type="range" id="slider-p" min="0" max="1" value="0.35" step="0.01" aria-label="Probability slider">
+              <input type="number" id="input-p" min="0" max="1" value="0.35" step="0.01" aria-label="Probability number">
+            </div>
+            <span class="input-hint">Validation: <strong>p must be between 0 and 1</strong> (0.00 ≤ p ≤ 1.00).</span>
+            <div id="error-p" class="input-error-msg" hidden></div>
+          </div>
+
+          <!-- Target successes k for probability evaluation -->
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="input-k">Enter Target Successes (<em>k</em>):</label>
+              <span class="val-display" id="display-k">7</span>
+            </div>
+            <div class="slider-input-combo">
+              <input type="range" id="slider-k" min="0" max="20" value="7" step="1" aria-label="Successes slider">
+              <input type="number" id="input-k" min="0" max="20" value="7" step="1" aria-label="Successes number">
+            </div>
+            <span class="input-hint">Validation: <strong>0 ≤ k ≤ n</strong> (integer). Evaluates P(X = k) and P(X ≤ k).</span>
+            <div id="error-k" class="input-error-msg" hidden></div>
+          </div>
+
+          <!-- Highlight / Calculation Mode -->
+          <div class="control-group">
+            <label>Visualization Highlight Mode:</label>
+            <div class="radio-pill-group">
+              <label class="radio-pill">
+                <input type="radio" name="calc-mode" value="exact" checked>
+                <span>Exact (X = k)</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="calc-mode" value="atmost">
+                <span>At most (X ≤ k)</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="calc-mode" value="atleast">
+                <span>At least (X ≥ k)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visualization & Results Column -->
+        <div class="results-column">
+          <!-- 1. Binomial PMF Calculator -->
+          <article class="calculator-card" id="pmf-calculator">
+            <div class="calc-header">
+              <div class="calc-title">
+                <span>🎯 Binomial PMF Calculator: P(X = k)</span>
+              </div>
+              <span class="badge-status ready" id="pmf-badge">PMF Evaluated</span>
+            </div>
+
+            <div class="formula-display-banner">
+              <span class="formula-label">Mathematical Expression:</span>
+              <code class="formula-text">P(X=k) = C(n,k) p^k (1-p)^(n-k)</code>
+            </div>
+
+            <div class="calc-result-box">
+              <div class="calc-result-label" id="pmf-result-label">Exact Probability P(X = 7)</div>
+              <div class="calc-result-value" id="pmf-val-result">0.1844</div>
+              <div class="calc-result-sub" id="pmf-pct-result">18.44% probability of observing exactly 7 successes</div>
+            </div>
+
+            <div class="calc-explanation-box">
+              <strong>Meaning:</strong> <span id="pmf-explanation-text">P(X = 7) represents the exact probability of observing precisely 7 successes in 20 independent Bernoulli trials.</span>
+            </div>
+          </article>
+
+          <!-- 2. Binomial CDF Calculator -->
+          <article class="calculator-card" id="cdf-calculator">
+            <div class="calc-header">
+              <div class="calc-title">
+                <span>📈 Binomial CDF Calculator</span>
+              </div>
+              <span class="badge-status ready">Cumulative &amp; Tail</span>
+            </div>
+
+            <div class="cdf-results-row">
+              <!-- Cumulative P(X <= k) -->
+              <div class="calc-result-box">
+                <div class="calc-result-label" id="cdf-label-atmost">Cumulative P(X ≤ 7)</div>
+                <div class="calc-result-value" id="cdf-val-atmost">0.6010</div>
+                <div class="calc-result-sub" id="cdf-pct-atmost">60.10% cumulative probability</div>
+              </div>
+
+              <!-- Tail P(X > k) = 1 - P(X <= k) -->
+              <div class="calc-result-box secondary-result">
+                <div class="calc-result-label" id="cdf-label-greater">Tail P(X > 7) = 1 - P(X ≤ 7)</div>
+                <div class="calc-result-value" id="cdf-val-greater">0.3990</div>
+                <div class="calc-result-sub" id="cdf-pct-greater">39.90% complementary probability</div>
+              </div>
+            </div>
+
+            <div class="calc-explanation-box cdf-explanation">
+              <strong>Explanation:</strong>
+              <p id="cdf-explanation-quote">“P(X &lt;= k) means the probability of getting k or fewer successes.”</p>
+              <p id="cdf-complement-quote" style="margin-top:0.25rem; font-size:0.78rem; opacity:0.9;">“P(X &gt; k) = 1 - P(X &le; k) means the probability of getting strictly more than k successes.”</p>
+            </div>
+          </article>
+
+          <!-- 3. Interactive Bar Chart showing the Binomial PMF -->
+          <article class="chart-card card">
+            <div class="chart-header">
+              <div>
+                <h3 class="chart-title">Binomial PMF Bar Chart</h3>
+                <p class="chart-subtitle">X-axis: Number of successes X &bull; Y-axis: Probability P(X)</p>
+              </div>
+              <div class="chart-legend">
+                <span class="legend-item"><span class="legend-box bar-normal"></span> P(X = x)</span>
+                <span class="legend-item"><span class="legend-box bar-selected"></span> Target k</span>
+                <span class="legend-item"><span class="legend-line mean-line"></span> Mean (μ = np)</span>
+              </div>
+            </div>
+
+            <!-- Canvas Container -->
+            <div class="canvas-container">
+              <canvas id="distribution-canvas" width="760" height="340" aria-label="Binomial Distribution PMF Chart"></canvas>
+              <div id="chart-tooltip" class="chart-tooltip" hidden></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Theory & Step-by-Step Breakdown Grid -->
+      <div class="details-grid">
+        <!-- Step-by-Step Mathematical Calculation -->
+        <div class="breakdown-card card">
+          <div class="panel-header">
+            <h3>Step-by-Step Calculation for P(X = <span class="param-k-text">5</span>)</h3>
+            <span class="badge-status ready">Numerical Breakdown</span>
+          </div>
+          <div class="math-steps">
+            <div class="step-item">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <div class="step-label">Binomial Coefficient (Combinations of choosing k successes from n):</div>
+                <div class="step-math" id="calc-step-ncr">
+                  ⁿCₖ = 10! / (5! · 5!) = <strong>252</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <div class="step-label">Probability of <em>k</em> Successes:</div>
+                <div class="step-math" id="calc-step-pk">
+                  pᵏ = 0.50⁵ = <strong>0.03125</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <div class="step-label">Probability of (<em>n - k</em>) Failures:</div>
+                <div class="step-math" id="calc-step-qnk">
+                  (1 - p)ⁿ⁻ᵏ = 0.50⁵ = <strong>0.03125</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-item total-step">
+              <div class="step-number">✓</div>
+              <div class="step-content">
+                <div class="step-label">Combined Probability Mass Function:</div>
+                <div class="step-math total-math" id="calc-step-result">
+                  P(X = 5) = 252 · 0.03125 · 0.03125 = <strong>0.2461</strong> (24.61%)
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AIML Practical Lab Context -->
+        <div class="aiml-box card">
+          <div class="panel-header">
+            <h3>AIML Laboratory Experiment Context</h3>
+          </div>
+          <div class="context-body">
+            <div class="aiml-case-study">
+              <h4>Case Study: Validation Error Tracking</h4>
+              <p>
+                Suppose a trained computer vision classifier has an accuracy of <strong id="case-p">p = 0.85</strong> per sample.
+                During an evaluation batch of <strong id="case-n">n = 20</strong> test images:
+              </p>
+              <ul class="case-bullets">
+                <li>The expected number of correct predictions is <strong id="case-mean">μ = 17.0</strong> images.</li>
+                <li>The probability of achieving exactly <strong id="case-k">k = 17</strong> correct classifications is <strong id="case-prob">0.2428</strong>.</li>
+                <li>The probability of obtaining at least <strong id="case-k-atleast">k = 17</strong> correct predictions is <strong id="case-cum">0.6477</strong>.</li>
+              </ul>
+            </div>
+            
+            <div class="lab-takeaway">
+              <span class="takeaway-badge">Key Takeaway</span>
+              <p>
+                When sample sizes <em>n</em> grow large and <em>p</em> is small, the Binomial distribution converges to the 
+                <strong>Poisson distribution</strong> (with <em>λ = n·p</em>). If <em>n</em> is large with intermediate <em>p</em>,
+                it converges to the <strong>Normal distribution</strong> by the Central Limit Theorem.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Probability Distribution Table (Collapsible) -->
+      <div class="table-card card">
+        <div class="panel-header">
+          <div>
+            <h3>Complete Distribution Table</h3>
+            <p class="panel-desc">All discrete outcomes from x = 0 to n.</p>
+          </div>
+          <button type="button" id="toggle-table-btn" class="btn btn-secondary btn-sm">
+            Toggle Full Table View
+          </button>
+        </div>
+        <div class="table-wrapper" id="prob-table-wrapper">
+          <table class="data-table" id="binomial-data-table">
+            <thead>
+              <tr>
+                <th>Outcome (x)</th>
+                <th>P(X = x)</th>
+                <th>Percentage</th>
+                <th>Cumulative P(X ≤ x)</th>
+                <th>Tail P(X ≥ x)</th>
+              </tr>
+            </thead>
+            <tbody id="binomial-table-body">
+              <!-- Dynamically populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== POISSON VIEW (FUNCTIONAL) ==================== -->
+    <section id="tab-poisson" class="view-panel">
+      <!-- Section Header -->
+      <div class="module-header">
+        <div>
+          <div class="eyebrow-tag">Lab Module 2 • Functional</div>
+          <h2 class="module-title">Poisson Distribution: Poisson(λ)</h2>
+          <p class="module-subtitle">
+            Study the probability of <em>k</em> events occurring in a fixed interval, given average rate <em>λ</em>.
+          </p>
+        </div>
+        <div class="formula-chip">
+          <span class="formula-label">PMF:</span>
+          <code>P(X = k) = (λᵏ · e⁻λ) / k!</code>
+        </div>
+      </div>
+
+      <!-- Comparison Presets -->
+      <div class="presets-bar">
+        <span class="presets-label">Poisson Presets (λ comparison):</span>
+        <div class="preset-buttons">
+          <button type="button" class="pois-preset-chip" data-lambda="2" data-k="2" id="pois-preset-rare">
+            Rare Events (λ=2)
+          </button>
+          <button type="button" class="pois-preset-chip active" data-lambda="6" data-k="6" id="pois-preset-default">
+            Lab Default (λ=6)
+          </button>
+          <button type="button" class="pois-preset-chip" data-lambda="10" data-k="10" id="pois-preset-frequent">
+            Frequent Events (λ=10)
+          </button>
+          <button type="button" class="pois-preset-chip" data-lambda="3" data-k="3" id="pois-preset-api">
+            API Requests (λ=3)
+          </button>
+        </div>
+      </div>
+
+      <!-- Parameters Display Card -->
+      <div class="selected-params-card">
+        <div class="selected-params-header">
+          <div class="selected-params-title">
+            <span>📋 Selected Parameters Display</span>
+            <span id="pois-validation-badge" class="validation-badge valid">✓ Inputs Valid</span>
+          </div>
+          <div class="selected-notation-chip" id="pois-selected-notation">X ~ Poisson(λ = 6)</div>
+        </div>
+        <div class="selected-readout-grid">
+          <div class="selected-readout-item">
+            <div class="selected-readout-label">Rate (λ)</div>
+            <div class="selected-readout-value" id="pois-disp-lambda">6</div>
+            <div class="selected-readout-sub">Avg events / interval</div>
+          </div>
+          <div class="selected-readout-item">
+            <div class="selected-readout-label">Mean E[X]</div>
+            <div class="selected-readout-value" id="pois-disp-mean">6</div>
+            <div class="selected-readout-sub">μ = λ</div>
+          </div>
+          <div class="selected-readout-item">
+            <div class="selected-readout-label">Variance Var(X)</div>
+            <div class="selected-readout-value" id="pois-disp-var">6</div>
+            <div class="selected-readout-sub">σ² = λ</div>
+          </div>
+          <div class="selected-readout-item">
+            <div class="selected-readout-label">Std Dev (σ)</div>
+            <div class="selected-readout-value" id="pois-disp-std">2.449</div>
+            <div class="selected-readout-sub">σ = √λ</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistic Cards -->
+      <section class="stats-section" aria-label="Poisson Distribution Statistics">
+        <div class="stats-section-header">
+          <div>
+            <h3 class="section-subheading">Poisson Distribution Statistics</h3>
+            <p class="panel-desc">Theoretical moments and shape using selected λ.</p>
+          </div>
+          <span class="badge-status ready" id="pois-stats-badge">Calculated: λ = 6</span>
+        </div>
+        <div class="stats-cards-grid">
+          <article class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-title">Mean E[X] (μ)</span>
+              <span class="stat-card-formula">λ</span>
+            </div>
+            <div class="stat-card-value" id="pois-stat-mean">6</div>
+            <div class="stat-card-sub" id="pois-stat-sub-mean">λ = 6</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-title">Variance Var(X) (σ²)</span>
+              <span class="stat-card-formula">λ</span>
+            </div>
+            <div class="stat-card-value" id="pois-stat-var">6</div>
+            <div class="stat-card-sub" id="pois-stat-sub-var">σ² = λ = 6</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-title">Std Deviation (σ)</span>
+              <span class="stat-card-formula">√λ</span>
+            </div>
+            <div class="stat-card-value" id="pois-stat-std">2.449</div>
+            <div class="stat-card-sub" id="pois-stat-sub-std">√6 = 2.449</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-title">Skewness (γ₁)</span>
+              <span class="stat-card-formula">1 / √λ</span>
+            </div>
+            <div class="stat-card-value" id="pois-stat-skewness">+0.408</div>
+            <div class="stat-card-sub" id="pois-stat-sub-skewness">Positive (right-skewed)</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-title">Mode</span>
+              <span class="stat-card-formula">⌊λ⌋</span>
+            </div>
+            <div class="stat-card-value" id="pois-stat-mode">6</div>
+            <div class="stat-card-sub" id="pois-stat-sub-mode">Most likely outcome</div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Main Interactive Grid -->
+      <div class="lab-layout">
+        <!-- Controls Column -->
+        <div class="controls-panel card">
+          <div class="panel-header">
+            <div>
+              <h3>Input Controls</h3>
+              <p class="panel-desc">Set the Poisson rate parameter λ.</p>
+            </div>
+            <button type="button" id="pois-reset-btn" class="text-btn" title="Reset to default">Reset (λ=6)</button>
+          </div>
+
+          <!-- Parameter λ -->
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="pois-input-lambda">Rate parameter (<em>λ</em>):</label>
+              <span class="val-display" id="pois-display-lambda">6</span>
+            </div>
+            <div class="slider-input-combo">
+              <input type="range" id="pois-slider-lambda" min="0.1" max="20" value="6" step="0.1" aria-label="Lambda slider">
+              <input type="number" id="pois-input-lambda" min="0.01" max="100" value="6" step="0.1" aria-label="Lambda number">
+            </div>
+            <span class="input-hint">Validation: <strong>λ must be positive</strong> (λ &gt; 0).</span>
+            <div id="pois-error-lambda" class="input-error-msg" hidden></div>
+          </div>
+
+          <!-- Target k -->
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="pois-input-k">Target events (<em>k</em>):</label>
+              <span class="val-display" id="pois-display-k">6</span>
+            </div>
+            <div class="slider-input-combo">
+              <input type="range" id="pois-slider-k" min="0" max="30" value="6" step="1" aria-label="k slider">
+              <input type="number" id="pois-input-k" min="0" max="100" value="6" step="1" aria-label="k number">
+            </div>
+            <span class="input-hint">Validation: <strong>k must be a non-negative integer</strong> (k ≥ 0).</span>
+            <div id="pois-error-k" class="input-error-msg" hidden></div>
+          </div>
+
+          <!-- Highlight Mode -->
+          <div class="control-group">
+            <label>Visualization Highlight Mode:</label>
+            <div class="radio-pill-group">
+              <label class="radio-pill">
+                <input type="radio" name="pois-calc-mode" value="exact" checked>
+                <span>Exact (X = k)</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="pois-calc-mode" value="atmost">
+                <span>At most (X ≤ k)</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="pois-calc-mode" value="atleast">
+                <span>At least (X ≥ k)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results Column -->
+        <div class="results-column">
+          <!-- PMF Calculator -->
+          <article class="calculator-card" id="pois-pmf-calculator">
+            <div class="calc-header">
+              <div class="calc-title"><span>🎯 Poisson PMF Calculator: P(X = k)</span></div>
+              <span class="badge-status ready">PMF Evaluated</span>
+            </div>
+            <div class="formula-display-banner">
+              <span class="formula-label">Mathematical Expression:</span>
+              <code class="formula-text">P(X=k) = (λᵏ · e⁻λ) / k!</code>
+            </div>
+            <div class="calc-result-box">
+              <div class="calc-result-label" id="pois-pmf-result-label">Exact Probability P(X = 6)</div>
+              <div class="calc-result-value" id="pois-pmf-val">0.1606</div>
+              <div class="calc-result-sub" id="pois-pmf-pct">16.06% probability of observing exactly 6 events</div>
+            </div>
+            <div class="calc-explanation-box">
+              <strong>Meaning:</strong> <span id="pois-pmf-explanation">P(X = 6) represents the exact probability of observing precisely 6 events in the interval.</span>
+            </div>
+          </article>
+
+          <!-- CDF Calculator -->
+          <article class="calculator-card" id="pois-cdf-calculator">
+            <div class="calc-header">
+              <div class="calc-title"><span>📈 Poisson CDF Calculator</span></div>
+              <span class="badge-status ready">Cumulative &amp; Tail</span>
+            </div>
+            <div class="cdf-results-row">
+              <div class="calc-result-box">
+                <div class="calc-result-label" id="pois-cdf-label-atmost">Cumulative P(X ≤ 6)</div>
+                <div class="calc-result-value" id="pois-cdf-atmost">0.6063</div>
+                <div class="calc-result-sub" id="pois-cdf-pct-atmost">60.63% cumulative probability</div>
+              </div>
+              <div class="calc-result-box secondary-result">
+                <div class="calc-result-label" id="pois-cdf-label-greater">Tail P(X > 6) = 1 − P(X ≤ 6)</div>
+                <div class="calc-result-value" id="pois-cdf-greater">0.3937</div>
+                <div class="calc-result-sub" id="pois-cdf-pct-greater">39.37% complementary probability</div>
+              </div>
+            </div>
+            <div class="calc-explanation-box cdf-explanation">
+              <strong>Explanation:</strong>
+              <p id="pois-cdf-quote">"P(X &lt;= k) means the probability of getting k or fewer events in the interval."</p>
+            </div>
+          </article>
+
+          <!-- Bar Chart -->
+          <article class="chart-card card">
+            <div class="chart-header">
+              <div>
+                <h3 class="chart-title">Poisson PMF Bar Chart</h3>
+                <p class="chart-subtitle">X-axis: Number of events X • Y-axis: Probability P(X)</p>
+              </div>
+              <div class="chart-legend">
+                <span class="legend-item"><span class="legend-box bar-normal"></span> P(X = x)</span>
+                <span class="legend-item"><span class="legend-box bar-selected"></span> Target k</span>
+                <span class="legend-item"><span class="legend-line mean-line"></span> Mean (μ = λ)</span>
+              </div>
+            </div>
+            <div class="canvas-container">
+              <canvas id="pois-distribution-canvas" width="760" height="340" aria-label="Poisson Distribution PMF Chart"></canvas>
+              <div id="pois-chart-tooltip" class="chart-tooltip" hidden></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Distribution Table -->
+      <div class="table-card card">
+        <div class="panel-header">
+          <div>
+            <h3>Complete Distribution Table</h3>
+            <p class="panel-desc">Discrete outcomes from x = 0 up to x ≈ λ + 4σ.</p>
+          </div>
+          <button type="button" id="pois-toggle-table-btn" class="btn btn-secondary btn-sm">Toggle Full Table View</button>
+        </div>
+        <div class="table-wrapper" id="pois-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Outcome (x)</th>
+                <th>P(X = x)</th>
+                <th>Percentage</th>
+                <th>Cumulative P(X ≤ x)</th>
+                <th>Tail P(X ≥ x)</th>
+              </tr>
+            </thead>
+            <tbody id="pois-table-body"><!-- Dynamically populated --></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== GEOMETRIC VIEW (SCHEDULED) ==================== -->
+    <section id="tab-geometric" class="view-panel">
+      <div class="preview-panel card">
+        <div class="preview-badge-row">
+          <span class="badge-status pending">Laboratory Module 3</span>
+          <span class="badge-status">Coming Next Session</span>
+        </div>
+        <h2 class="preview-title">Geometric Distribution</h2>
+        <p class="preview-desc">
+          The Geometric distribution models the number of Bernoulli trials required to obtain the first success.
+          It represents a discrete waiting-time distribution characterized by the key theoretical property of <em>memorylessness</em>.
+        </p>
+
+        <div class="preview-grid">
+          <div class="preview-info-box">
+            <h4>Mathematical Formulation</h4>
+            <div class="formula-block">
+              <code>P(X = k) = (1 - p)ᵏ⁻¹ · p</code>
+            </div>
+            <ul class="preview-list">
+              <li><strong>Parameter:</strong> p ∈ (0, 1] (Probability of success in a single trial)</li>
+              <li><strong>Support:</strong> k ∈ {1, 2, 3, ...} (Trial number of first success)</li>
+              <li><strong>Expected Value:</strong> E[X] = 1 / p</li>
+              <li><strong>Variance:</strong> Var(X) = (1 - p) / p²</li>
+            </ul>
+          </div>
+
+          <div class="preview-info-box">
+            <h4>AIML Applications in upcoming lab</h4>
+            <ul class="preview-list">
+              <li><strong>Reinforcement Learning:</strong> Number of exploratory actions taken by an agent before finding a rewarded state.</li>
+              <li><strong>Genetic Algorithms &amp; Heuristics:</strong> Number of mutation iterations required to discover a valid candidate solution.</li>
+              <li><strong>Failure &amp; Reliability Analysis:</strong> Steps until component failure in machine learning pipeline stages.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="preview-notice">
+          <div class="notice-icon">ℹ️</div>
+          <div>
+            <strong>Undergraduate Lab Notice:</strong>
+            This module will be unlocked in the subsequent laboratory assignment. Please use the Binomial Distribution module for today's assignment.
+          </div>
+        </div>
+
+        <div class="preview-actions">
+          <button type="button" class="btn btn-primary" id="btn-return-binomial-geometric" onclick="switchTab('binomial')">
+            ← Return to Active Binomial Module
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Application Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <strong>AIML Undergraduate Laboratory</strong> • Discrete Probability Distributions Module
+      </div>
+      <div class="footer-right">
+        <span>Course Unit: Probability &amp; Statistics for Machine Learning</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js?v=6"></script>
+</body>
+</html>
